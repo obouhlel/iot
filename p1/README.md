@@ -29,3 +29,48 @@ Common Vagrant commands for managing your environment:
 - `vagrant status`: Check the status of all VMs in the Vagrantfile
 - `vagrant reload`: Restart VMs and load new Vagrantfile configuration
 - `vagrant provision`: Run provisioning scripts on running VMs
+
+## Vagrantfile
+
+This project's Vagrantfile configures a minimal K3s Kubernetes cluster with two virtual machines:
+
+### Global Configuration
+
+- **Box used**: Ubuntu Jammy 64-bit (`ubuntu/jammy64`)
+
+### Server Node (userS)
+
+- **Hostname**: userS
+- **IP**: 192.168.56.110 (private network)
+- **Resources**: 1024MB RAM, 1 CPU
+- **Provisioning**: Executes the `server.sh` script which configures the K3s server node (control plane)
+
+### Worker Node (userSW)
+
+- **Hostname**: userSW
+- **IP**: 192.168.56.111 (private network)
+- **Resources**: 1024MB RAM, 1 CPU
+- **Provisioning**: Executes the `worker.sh` script which configures the K3s worker node connecting to the server
+
+## Scripts
+
+### Server Script (server.sh)
+
+The server script configures the K3s control plane node:
+
+1. Updates the system packages and installs curl
+2. Installs K3s in server mode using the official installation script
+3. Sets up the kubectl configuration for the current user
+4. Verifies the installation by checking if kubectl can communicate with the cluster
+5. Retrieves the node token from the K3s server
+6. Saves this token to a shared folder so worker nodes can access it for authentication
+
+### Worker Script (worker.sh)
+
+The worker script configures K3s agent nodes that connect to the server:
+
+1. Updates the system packages and installs curl
+2. Gets the server node's IP address (192.168.56.110)
+3. Retrieves the authentication token saved by the server script
+4. Installs K3s in agent mode, configuring it to connect to the server using the provided IP and token
+5. The worker node will automatically register with the K3s server upon successful installation
