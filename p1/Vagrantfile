@@ -1,41 +1,45 @@
 Vagrant.configure("2") do |config|
+  # OS
+  config.vm.box = "ubuntu/jammy64"
+
+  # Give my sshkey to the vm
+  config.ssh.insert_key = true
+
+  # Setup the server
   config.vm.define "userS" do |server|
-    server.vm.box = "ubuntu/jammy64"
+    # Setting name of container, networking
     server.vm.hostname = "userS"
     server.vm.network "private_network", ip: "192.168.56.110"
-    
+
+    # Resources
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.cpus = 1
     end
 
-    server.vm.provision "shell", inline: <<-SHELL
-      sudo apt-get update -y
-      sudo apt-get install -y curl
-      curl -sfL https://get.k3s.io | sh -
-      mkdir -p $HOME/.kube
-      sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
-      sudo chown $(whoami):$(whoami) $HOME/.kube/config
-      echo "K3s Server setup complete!"
-    SHELL
-  end
+    # Copy the file in the vm
+    server.vm.provision "file", source: "scripts/server.sh", destination: "/tmp/server.sh"
 
+    # Execute the script
+    server.vm.provision "shell", inline: "sh /tmp/server.sh"
+  end
+  
+  # Setup the worker
   config.vm.define "userSW" do |worker|
-    worker.vm.box = "ubuntu/jammy64"
+    # Setting name of container, networking
     worker.vm.hostname = "userSW"
     worker.vm.network "private_network", ip: "192.168.56.111"
 
+    # Resources
     worker.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.cpus = 1
     end
 
-    worker.vm.provision "shell", inline: <<-SHELL
-      sudo apt-get update -y
-      sudo apt-get install -y curl
-      K3S_TOKEN=$(ssh -o StrictHostKeyChecking=no vagrant@192.168.56.110 "sudo cat /var/lib/rancher/k3s/server/node-token")
-      curl -sfL https://get.k3s.io | K3S_URL="https://192.168.56.110:6443" K3S_TOKEN="$K3S_TOKEN" sh -
-      echo "K3s Worker setup complete!"
-    SHELL
+    # Copy the file in the vm
+    worker.vm.provision "file", source: "scripts/worker.sh", destination: "/tmp/worker.sh"
+
+    # Execute the script
+    worker.vm.provision "shell", inline: "sh /tmp/worker.sh"
   end
 end
