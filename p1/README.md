@@ -74,3 +74,19 @@ The worker script configures K3s agent nodes that connect to the server:
 3. Retrieves the authentication token saved by the server script
 4. Installs K3s in agent mode, configuring it to connect to the server using the provided IP and token
 5. The worker node will automatically register with the K3s server upon successful installation
+
+## Checks
+
+To check if the server is running with the worker, use the connection ssh in the server, and type :
+
+```sh
+sudo kubectl get nodes -o wide
+```
+
+You need to have 2 lines, the first is the server and the seconde the agent
+
+```sh
+NAME     STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+users    Ready    control-plane,master   14m   v1.31.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-134-generic   containerd://2.0.2-k3s2
+usersw   Ready    <none>                 13m   v1.31.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-134-generic   containerd://2.0.2-k3s2
+```
