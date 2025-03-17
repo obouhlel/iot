@@ -3,7 +3,7 @@
 sudo apt-get update -y
 sudo apt-get install -y curl
 
-curl -sfL https://get.k3s.io | sh -
+curl -sfL https://get.k3s.io | sh -s - --node-ip=192.168.56.110 --advertise-address=192.168.56.110 --bind-address=192.168.56.110
 
 mkdir -p $HOME/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
