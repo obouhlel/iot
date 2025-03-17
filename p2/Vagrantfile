@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     end
 
     # Execute the script directly
-    server.vm.provision "shell", path: "scripts/server.sh"
+    server.vm.provision "shell", path: "scripts/setup.sh"
   end
 
 end
