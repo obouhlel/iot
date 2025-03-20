@@ -1,0 +1,3 @@
+[submodule "p3/obouhlel-iot-argocd"]
+	path = p3/obouhlel-iot-argocd
+	url = https://github.com/obouhlel/obouhlel-iot-argocd
