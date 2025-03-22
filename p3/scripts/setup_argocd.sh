@@ -7,7 +7,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 echo "Le mot de passe est stocké dans le fichier : $TEMP_PASSWORD_FILE"
 
 # Créer une application Argo CD
-kubectl apply -f ../confs/agrocd-application.yaml
+kubectl apply -f ./confs/agrocd-application.yaml
 
 # Port forwarding pour accéder à l'interface Argo CD
 echo "Démarrage du port-forward pour Argo CD..."
