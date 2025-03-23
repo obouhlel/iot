@@ -9,9 +9,8 @@ echo "Le mot de passe est stocké dans le fichier : $TEMP_PASSWORD_FILE"
 # Créer une application Argo CD
 kubectl apply -f ./confs/agrocd-application.yaml
 
-# Port forwarding pour accéder à l'interface Argo CD
-echo "Démarrage du port-forward pour Argo CD..."
-kubectl port-forward svc/argocd-server -n argocd 8095:443 &
-echo "Accédez à Argo CD à l'adresse: https://localhost:8095"
+# Run server and get account
+kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+echo "Accédez à Argo CD à l'adresse: https://argocd.localhost/"
 echo "Utilisateur: admin"
 echo "Mot de passe: voir $TEMP_PASSWORD_FILE"

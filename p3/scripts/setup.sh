@@ -2,8 +2,7 @@
 
 # Créer un cluster K3d
 echo "Création du cluster K3d..."
-k3d cluster create iot-cluster -p "8090:80@loadbalancer" -p "8043:443@loadbalancer" --agents 1
-
+k3d cluster create iot-cluster
 # Créer les namespaces
 echo "Création des namespaces..."
 kubectl create namespace argocd
