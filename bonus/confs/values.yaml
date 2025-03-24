@@ -1,0 +1,7 @@
+global:
+  edition: ce
+  hosts:
+    domain: hosts.local
+    https: false
+  ingress:
+    configureCertmanager: false
