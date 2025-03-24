@@ -1,27 +1,53 @@
 #!/bin/bash
 
-# Create cluster
-echo "Create cluster..."
-k3d cluster create iot-bonus
+# Créer le cluster k3d
+echo "Creating K3d cluster..."
+k3d cluster create iot-bonus \
+    --api-port 6550 \
+    --agents 1 \
+    --port "80:80@loadbalancer" \
+    --port "443:443@loadbalancer"
 
-# Add gitlab helm charts
-echo "Get Helm charts..."
-helm repo add gitlab https://charts.gitlab.io/
-helm repo update
+# Récupérer le kubeconfig dans un fichier et l'utiliser
+echo "Downloading kubeconfig..."
+k3d kubeconfig get iot-bonus > kubeconfig.yaml
+export KUBECONFIG=$(pwd)/kubeconfig.yaml
 
-# Create namespace
-echo "Create namespaces..."
+# Extraire le certificat CA depuis le kubeconfig et le sauvegarder dans un fichier
+echo "Extracting CA certificate..."
+CA_DATA=$(kubectl config view --raw -o jsonpath='{.clusters[?(@.name=="k3d-iot-bonus")].cluster.certificate-authority-data}')
+echo "$CA_DATA" | base64 --decode > ca.crt
+
+# Installer le contrôleur Ingress NGINX
+echo "Installing NGINX Ingress Controller..."
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+
+# Attendre que le contrôleur Ingress soit prêt
+echo "Waiting for NGINX Ingress Controller..."
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=120s
+
+# Créer les namespaces
+echo "Creating namespaces..."
 kubectl create namespace gitlab
 kubectl create namespace argocd
 kubectl create namespace dev
 
-# Configure gitlab
-echo "Install gitlab on http://gitlab.hosts.local/ ..."
-helm install gitlab gitlab/gitlab --namespace gitlab --create-namespace -f ./confs/values.yaml
+# Ajouter le repo Helm GitLab
+echo "Adding GitLab Helm repository..."
+helm repo add gitlab https://charts.gitlab.io/
+helm repo update
 
-echo "Waiting gitlab..."
-kubectl wait --for=condition=Ready pods --all -n gitlab --timeout=600s
+# Installer Argo CD
+echo "Installation d'Argo CD..."
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-# Mot de passe gitlab
-echo -n "Password : "
-kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 --decode
+# Attendre que tous les pods Argo CD soient prêts
+echo "Attente du démarrage d'Argo CD..."
+kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
+
+# Installer GitLab avec le fichier values.yaml
+echo "Installing GitLab using values.yaml configuration..."
+helm install gitlab gitlab/gitlab --namespace gitlab --timeout 3m -f ./confs/values.yaml

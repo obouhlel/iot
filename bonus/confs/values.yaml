@@ -5,3 +5,37 @@ global:
     https: false
   ingress:
     configureCertmanager: false
+    enabled: true
+    class: "nginx"
+  initialRootPassword:
+    secret: gitlab-initial-root-password
+    key: password
+
+nginx-ingress:
+  enabled: false
+
+certmanager:
+  install: false
+
+gitlab-runner:
+  install: false
+
+prometheus:
+  install: false
+
+postgresql:
+  persistence:
+    size: 1Gi
+
+redis:
+  master:
+    persistence:
+      size: 1Gi
+
+gitaly:
+  persistence:
+    size: 5Gi
+
+minio:
+  persistence:
+    size: 5Gi
