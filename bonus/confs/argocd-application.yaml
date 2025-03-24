@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://gitlab.hosts.local/42/wil
+    repoURL: https://gitlab.hosts.local/42/wil.git
     targetRevision: HEAD
     path: .
   destination:

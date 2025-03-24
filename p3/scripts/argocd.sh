@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Créer une application Argo CD and configure the ingress
-kubectl apply -f ./confs/agrocd-application.yaml
+kubectl apply -f ./confs/argocd-application.yaml
 kubectl apply -f ./confs/argocd-ingress.yaml
 
 # Get account

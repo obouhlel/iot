@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Set secrets
-kubectl apply -f ./confs/argocd-secret.yaml
+kubectl delete application wil -n argocd
+kubectl delete secret gitlab-repo-token -n argocd
 
-# Use the application
-kubectl apply -f ./confs/agrocd-application.yaml
+kubectl apply -f ./confs/argocd-gitlab-token.yaml
+kubectl apply -f ./confs/argocd-application.yaml
