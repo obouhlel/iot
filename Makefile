@@ -18,4 +18,4 @@ clean:
 
 fclean: stop clean
 
-.PHONY: p1 p2 p3 stop clean fclean
+.PHONY: p1 p2 p3 bonus stop clean fclean
