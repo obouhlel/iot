@@ -8,11 +8,6 @@ k3d cluster create iot-bonus \
     --port "80:80@loadbalancer" \
     --port "443:443@loadbalancer"
 
-# Récupérer le kubeconfig dans un fichier et l'utiliser
-echo "Downloading kubeconfig..."
-k3d kubeconfig get iot-bonus > kubeconfig.yaml
-export KUBECONFIG=$(pwd)/kubeconfig.yaml
-
 # Extraire le certificat CA depuis le kubeconfig et le sauvegarder dans un fichier
 echo "Extracting CA certificate..."
 CA_DATA=$(kubectl config view --raw -o jsonpath='{.clusters[?(@.name=="k3d-iot-bonus")].cluster.certificate-authority-data}')
@@ -50,4 +45,4 @@ kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
 
 # Installer GitLab avec le fichier values.yaml
 echo "Installing GitLab using values.yaml configuration..."
-helm install gitlab gitlab/gitlab --namespace gitlab --timeout 3m -f ./confs/values.yaml
+helm install gitlab gitlab/gitlab --namespace gitlab --timeout=300s -f ./confs/values.yaml
