@@ -1,14 +1,14 @@
 p1:
-	@cd p1 && vagrant up
+	@cd p1; vagrant up
 
 p2:
-	@cd p2 && vagrant up
+	@cd p2; vagrant up
 
 p3:
-	@cd p3 && sh ./scripts/setup.sh && sh ./scripts/argocd.sh
+	@cd p3; sh ./scripts/setup.sh; sh ./scripts/argocd.sh
 
 bonus:
-	@cd bonus && sh ./scripts/setup.sh && sleep 30 && sh ./scripts/argocd.sh && sh ./scripts/gitlab.sh
+	@cd bonus; sh ./scripts/setup.sh; sh ./scripts/argocd.sh; sleep 30; sh ./scripts/gitlab.sh
 
 stop:
 	@docker stop $$(docker ps -aq)

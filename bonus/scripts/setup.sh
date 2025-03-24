@@ -45,4 +45,4 @@ kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
 
 # Installer GitLab avec le fichier values.yaml
 echo "Installing GitLab using values.yaml configuration..."
-helm install gitlab gitlab/gitlab --namespace gitlab --timeout=300s -f ./confs/values.yaml
+helm install gitlab gitlab/gitlab --namespace gitlab --timeout=300s -f ./confs/gitlab-values.yaml
