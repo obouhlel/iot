@@ -7,6 +7,6 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: https://gitlab.hosts.local/root/wil.git/
+  url: http://10.43.116.61:8181/root/wil.git/
   username: root
-  password: glpat-ZDVqT6XDZ7DYurHWox-z
+  password: glpat-6YxzZYxRL3s8WzmTpg8x
