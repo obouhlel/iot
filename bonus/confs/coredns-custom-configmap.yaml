@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  custom.server: |
+    hosts {
+      172.18.0.3 argocd.hosts.local
+      172.18.0.3 gitlab.hosts.local
+      172.18.0.3 kas.hosts.local
+      172.18.0.3 minio.hosts.local
+      172.18.0.3 registry.hosts.local
+      fallthrough
+    }

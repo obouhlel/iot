@@ -5,8 +5,8 @@ metadata:
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
-type: Opaque
 stringData:
-  url: https://gitlab.hosts.local/42/wil.git
+  type: git
+  url: https://gitlab.hosts.local/root/wil.git/
   username: root
-  password: glpat-msWaji3qnUtxjsHfWJWv
+  password: glpat-ZDVqT6XDZ7DYurHWox-z
