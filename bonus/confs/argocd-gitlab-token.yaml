@@ -7,6 +7,6 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: http://10.43.116.61:8181/root/wil.git/
+  url: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/root/wil.git/
   username: root
-  password: glpat-6YxzZYxRL3s8WzmTpg8x
+  password: TOKEN # Generate and change the token
