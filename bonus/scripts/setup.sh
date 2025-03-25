@@ -15,6 +15,7 @@ CA_DATA=$(kubectl config view --raw -o jsonpath='{.clusters[?(@.name=="k3d-iot-b
 echo "$CA_DATA" | base64 --decode > ca.crt
 
 # Update DNS
+kubectl apply -f ./confs/coredns-custom-configmap.yaml
 kubectl apply -f ./confs/coredns-hosts-configmap.yaml
 
 # Installer le contrôleur Ingress NGINX
