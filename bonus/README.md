@@ -91,8 +91,8 @@ git remote set-url origin https://root:$TOKEN_GITLAB@gitlab.hosts.local/root/wil
 Deploy the application using ArgoCD:
 
 ```bash
-chmod +x ./scripts/deploy.sh
-./scripts/deploy.sh
+chmod +x ./scripts/setup_app.sh
+./scripts/setup_app.sh
 ```
 
 ## Accessing the Services
