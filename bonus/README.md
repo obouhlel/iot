@@ -68,23 +68,22 @@ chmod +x ./scripts/gitlab.sh
 export GITLAB_TOKEN=<your-token>
 ```
 
-4. Update the file `confs/argocd-gitlab-token.yaml` and give the token at key password
-5. Create a new project named "wil", with root user, and at public
-6. Set the certificate gitlab, at bonus repertory, with this command :
+4. Create a new project named "wil", with root user, and at public
+5. Set the certificate gitlab, at bonus repertory, with this command :
 
 ```sh
 git config --global http.sslCAInfo $PWD/gitlab.crt
 ```
 
-5. Clone the project `wil`
-6. Copy and past the `manifests.yaml`
-7. Update the repo url with this command :
+6. Clone the project `wil`
+7. Copy and past the `manifests.yaml`
+8. Update the repo url with this command :
 
 ```sh
 git remote set-url origin https://root:$TOKEN_GITLAB@gitlab.hosts.local/root/wil.git
 ```
 
-8. Push your application code to this repository
+9. Push your application code to this repository
 
 ### 5. Deploy Application with ArgoCD
 
@@ -105,7 +104,6 @@ chmod +x ./scripts/setup_app.sh
 
 - `confs/gitlab-values.yaml`: GitLab Helm chart configuration
 - `confs/argocd-ingress.yaml`: ArgoCD ingress configuration
-- `confs/argocd-gitlab-token.yaml`: Secret for GitLab authentication
 - `confs/argocd-application.yaml`: ArgoCD application configuration
 
 ## CI/CD Workflow
