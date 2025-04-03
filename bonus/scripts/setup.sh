@@ -9,11 +9,6 @@ k3d cluster create iot-bonus \
     --port "443:443@loadbalancer" \
     --network k3d-network
 
-# Extraire le certificat CA depuis le kubeconfig et le sauvegarder dans un fichier
-echo "Extracting CA certificate..."
-CA_DATA=$(kubectl config view --raw -o jsonpath='{.clusters[?(@.name=="k3d-iot-bonus")].cluster.certificate-authority-data}')
-echo "$CA_DATA" | base64 --decode > ca.crt
-
 # Installer le contrôleur Ingress NGINX
 echo "Installing NGINX Ingress Controller..."
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
