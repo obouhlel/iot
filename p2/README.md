@@ -61,27 +61,27 @@ Une fois que vous êtes connecté à la VM via `vagrant ssh bghandriS`, vous pou
 
 ### Gestion du cluster
 
-- `sudo k3s kubectl get nodes`: Affiche tous les nœuds du cluster
-- `sudo k3s kubectl cluster-info`: Affiche les informations sur le cluster
-- `sudo k3s kubectl get all --all-namespaces`: Affiche toutes les ressources dans tous les namespaces
+- `kubectl get nodes`: Affiche tous les nœuds du cluster
+- `kubectl cluster-info`: Affiche les informations sur le cluster
+- `kubectl get all --all-namespaces`: Affiche toutes les ressources dans tous les namespaces
 
 ### Gestion des applications
 
-- `sudo k3s kubectl get pods`: Liste tous les pods
-- `sudo k3s kubectl get deployments`: Liste tous les déploiements
-- `sudo k3s kubectl get services`: Liste tous les services
-- `sudo k3s kubectl get ingress`: Liste toutes les ressources Ingress
+- `kubectl get pods`: Liste tous les pods
+- `kubectl get deployments`: Liste tous les déploiements
+- `kubectl get services`: Liste tous les services
+- `kubectl get ingress`: Liste toutes les ressources Ingress
 
 ### Diagnostic et dépannage
 
-- `sudo k3s kubectl describe pod <nom-du-pod>`: Affiche les détails d'un pod spécifique
-- `sudo k3s kubectl logs <nom-du-pod>`: Affiche les logs d'un pod
-- `sudo k3s kubectl exec -it <nom-du-pod> -- /bin/sh`: Ouvre un shell dans un pod
+- `kubectl describe pod <nom-du-pod>`: Affiche les détails d'un pod spécifique
+- `kubectl logs <nom-du-pod>`: Affiche les logs d'un pod
+- `kubectl exec -it <nom-du-pod> -- /bin/sh`: Ouvre un shell dans un pod
 
 ### Configuration du cluster
 
-- `sudo k3s kubectl apply -f <fichier.yaml>`: Applique une configuration depuis un fichier
-- `sudo k3s kubectl delete -f <fichier.yaml>`: Supprime une ressource définie dans un fichier
+- `kubectl apply -f <fichier.yaml>`: Applique une configuration depuis un fichier
+- `kubectl delete -f <fichier.yaml>`: Supprime une ressource définie dans un fichier
 
 ## Comment démarrer
 
