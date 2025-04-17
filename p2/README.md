@@ -57,7 +57,7 @@ project/
 
 ## Commandes utiles K3s
 
-Une fois que vous êtes connecté à la VM via `vagrant ssh userS`, vous pouvez utiliser ces commandes:
+Une fois que vous êtes connecté à la VM via `vagrant ssh bghandriS`, vous pouvez utiliser ces commandes:
 
 ### Gestion du cluster
 
@@ -86,7 +86,7 @@ Une fois que vous êtes connecté à la VM via `vagrant ssh userS`, vous pouvez 
 ## Comment démarrer
 
 1. Lancez la VM avec `vagrant up`
-2. Connectez-vous à la VM avec `vagrant ssh userS`
+2. Connectez-vous à la VM avec `vagrant ssh bghandriS`
 3. Vérifiez que K3s fonctionne avec `sudo k3s kubectl get nodes`
 4. Vérifiez que les applications sont déployées avec `sudo k3s kubectl get pods`
 
