@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   # OS
-  config.vm.box = "ubuntu/jammy64"
+  config.vm.box = "debian/bullseye64"
 
   # Setup the server
   config.vm.define "userS" do |server|
