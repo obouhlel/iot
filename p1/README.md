@@ -38,16 +38,16 @@ This project's Vagrantfile configures a minimal K3s Kubernetes cluster with two 
 
 - **Box used**: Ubuntu Jammy 64-bit (`ubuntu/jammy64`)
 
-### Server Node (userS)
+### Server Node (sredjiniS)
 
-- **Hostname**: userS
+- **Hostname**: sredjiniS
 - **IP**: 192.168.56.110 (private network)
 - **Resources**: 1024MB RAM, 1 CPU
 - **Provisioning**: Executes the `server.sh` script which configures the K3s server node (control plane)
 
-### Worker Node (userSW)
+### Worker Node (sredjiniSW)
 
-- **Hostname**: userSW
+- **Hostname**: sredjiniSW
 - **IP**: 192.168.56.111 (private network)
 - **Resources**: 1024MB RAM, 1 CPU
 - **Provisioning**: Executes the `worker.sh` script which configures the K3s worker node connecting to the server
@@ -60,7 +60,7 @@ The server script configures the K3s control plane node:
 
 1. Updates the system packages and installs curl
 2. Installs K3s in server mode using the official installation script
-3. Sets up the kubectl configuration for the current user
+3. Sets up the kubectl configuration for the current sredjini
 4. Verifies the installation by checking if kubectl can communicate with the cluster
 5. Retrieves the node token from the K3s server
 6. Saves this token to a shared folder so worker nodes can access it for authentication
@@ -86,7 +86,7 @@ sudo kubectl get nodes -o wide
 You need to have 2 lines, the first is the server and the seconde the agent
 
 ```sh
-NAME     STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
-users    Ready    control-plane,master   14m   v1.31.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-134-generic   containerd://2.0.2-k3s2
-usersw   Ready    <none>                 13m   v1.31.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-134-generic   containerd://2.0.2-k3s2
+NAME         STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+sredjinis    Ready    control-plane,master   14m   v1.31.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-134-generic   containerd://2.0.2-k3s2
+sredjinisw   Ready    <none>                 13m   v1.31.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-134-generic   containerd://2.0.2-k3s2
 ```

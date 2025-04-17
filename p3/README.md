@@ -54,11 +54,7 @@ Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. It aut
 
 ## Accessing Argo CD UI
 
-Once the port forwarding is set up, you can access the Argo CD UI:
-
-1. Open your browser and navigate to: https://localhost:8095/
-2. Username: admin
-3. Password: Find it in the temporary file location shown during setup
+Once the NGINX Ingress Controller is set up, run `scripts/argocd.sh` and you will have the url and the user and password to connect to Argo CD UI.
 
 ## Working with the Git Submodule
 
@@ -71,13 +67,3 @@ git submodule update --init --recursive
 # Pull the latest changes
 git submodule update --remote
 ```
-
-## Cleaning Up
-
-When you're done with the project, run the cleanup script:
-
-```bash
-./scripts/clean.sh
-```
-
-This will remove all resources created for this project, including Argo CD applications, namespaces, and the K3d cluster.
