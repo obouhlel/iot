@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   # OS
-  config.vm.box = "ubuntu/jammy64"
+  config.vm.box = "debian/bullseye64"
 
   # Setup the server
   config.vm.define "bghandriS" do |server|
@@ -11,6 +11,12 @@ Vagrant.configure("2") do |config|
     # Execute the script directly
     server.vm.provision "shell", path: "scripts/setup.sh"
     server.vm.provision "shell", path: "scripts/deploy.sh"
+  end
+
+  # Add hosts
+  config.hosts do |host|
+    hosts.add "app1.com", ["192.168.56.110"]
+    hosts.add "app2.com", ["192.168.56.110"]
   end
 
 end
