@@ -11,7 +11,7 @@ k3d cluster create iot-bonus \
 
 # Installer le contrôleur Ingress NGINX
 echo "Installing NGINX Ingress Controller..."
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.1/deploy/static/provider/cloud/deploy.yaml
 
 # Attendre que le contrôleur Ingress soit prêt
 echo "Waiting for NGINX Ingress Controller..."
