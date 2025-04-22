@@ -25,15 +25,16 @@ prometheus:
 
 postgresql:
   persistence:
-    size: 1Gi
+    size: 500Mi
 
 redis:
   master:
     persistence:
-      size: 1Gi
+      size: 500Mi
 
 gitaly:
-  install: false
+  persistence:
+    size: 1Gi
 
 minio:
   install: false

@@ -17,8 +17,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 echo "Waiting for NGINX Ingress Controller..."
 kubectl wait --namespace ingress-nginx \
   --for=condition=ready pod \
-  --timeout=120s \
-  # --selector=app.kubernetes.io/component=controller \
+  --timeout=200s
+  # --selector=app.kubernetes.io/component=controller
 
 # Créer les namespaces
 echo "Creating namespaces..."
