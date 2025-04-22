@@ -15,10 +15,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 # Attendre que le contrôleur Ingress soit prêt
 echo "Waiting for NGINX Ingress Controller..."
-kubectl wait --namespace ingress-nginx \
-  --for=condition=ready pod \
-  --timeout=200s
-  # --selector=app.kubernetes.io/component=controller
+kubectl wait --namespace ingress-nginx --for=condition=ready pod
 
 # Créer les namespaces
 echo "Creating namespaces..."
@@ -37,7 +34,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 # Attendre que tous les pods Argo CD soient prêts
 echo "Attente du démarrage d'Argo CD..."
-# kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
+kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
 
 # Installer GitLab avec le fichier values.yaml
 echo "Installing GitLab using values.yaml configuration..."
