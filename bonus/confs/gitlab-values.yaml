@@ -31,10 +31,11 @@ redis:
   master:
     persistence:
       size: 500Mi
-
+ 
 gitaly:
   persistence:
     size: 1Gi
 
 minio:
-  install: false
+  persistence:
+    size: 1Gi
