@@ -14,9 +14,8 @@ kubectl create namespace argocd
 kubectl create namespace ingress-nginx
 kubectl create namespace dev
 
-# Installer NGINX Ingress Controller
 echo "Install NGINX"
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.1/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 
 # Attendre que les pods soient prêts
 kubectl wait --namespace ingress-nginx \
