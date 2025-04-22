@@ -33,8 +33,7 @@ redis:
       size: 1Gi
 
 gitaly:
-  persistence:
-    size: 5Gi
+  install: false
 
 minio:
   install: false
